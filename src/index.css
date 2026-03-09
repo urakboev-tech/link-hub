@@ -3,32 +3,28 @@
 @theme {
   --font-sans: "Inter", "Roboto", sans-serif;
   --font-display: "Outfit", "Inter", sans-serif;
-  --color-brand-accent: #8a2be2;
-  /* Bright Purple instead of lime for contrast */
-  --color-brand-dark: #f0f0f0;
-  /* Off-white / Light gray */
-  --color-brand-text: #1a1a1a;
-  /* Dark text */
-  --color-glass-bg: rgba(255, 255, 255, 0.7);
-  --color-glass-border: rgba(0, 0, 0, 0.1);
+  --color-brand-accent: #0077ff;
+  --color-brand-dark: #dcecf3;
+  --color-brand-text: #1e293b;
+  --color-glass-bg: rgba(255, 255, 255, 0.4);
+  --color-glass-border: rgba(255, 255, 255, 0.6);
 }
 
 @layer base {
   body {
-    @apply bg-[#e5e5e5] text-[#1a1a1a] font-sans antialiased min-h-screen relative overflow-x-hidden;
-    /* Adding very subtle noise texture for brutalist look */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+    @apply bg-[#dcecf3] text-[#1e293b] font-sans antialiased min-h-screen relative overflow-x-hidden;
+    background-image: none;
   }
 
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
   }
 }
 
-/* Background effects - Digital Brutalism */
+/* Background effects - Soft Glows */
 .bg-gradient-shapes {
   position: absolute;
   top: 0;
@@ -40,31 +36,50 @@
   background-color: var(--color-brand-dark);
 }
 
-.grid-bg {
+.bg-gradient-shapes::before {
+  content: '';
   position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-size: 50px 50px;
-  background-image:
-    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  top: -10%;
+  left: -10%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(60px);
 }
 
-/* Hard Glassmorphism utility */
+.bg-gradient-shapes::after {
+  content: '';
+  position: absolute;
+  bottom: -10%;
+  right: -10%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(0, 119, 255, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.grid-bg {
+  display: none;
+}
+
+/* Frosted Glassmorphism utility */
 .glass-panel {
   background: var(--color-glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 2px solid #000;
-  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
-  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-glass-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  border-radius: 24px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .glass-panel:hover {
-  border-color: var(--color-brand-accent);
-  box-shadow: 8px 8px 0px 0px var(--color-brand-accent);
-  transform: translate(-4px, -4px);
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(0, 119, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.9);
 }
 
 /* Brutalist Animations */
